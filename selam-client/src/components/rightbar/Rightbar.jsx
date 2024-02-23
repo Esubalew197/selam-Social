@@ -3,6 +3,7 @@ import { Users } from "../../dummyData";
 import Online from "../online/Online";
 
 export default function Rightbar({ profile }) {
+  const PF = process.env.REACT_APP_PUBLIC_FOLDER
   const HomeRightbar = () => {
     return (
       <>
