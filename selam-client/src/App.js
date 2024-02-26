@@ -1,36 +1,36 @@
-import Home from "./pages/home/Home";
-import Login from "./pages/login/Login";
-import Profile from "./pages/profile/Profile";
-import Register from "./pages/register/Register";
+/* eslint-disable react/react-in-jsx-scope */
+import Home from './pages/home/Home'
+import Login from './pages/login/Login'
+import Profile from './pages/profile/Profile'
+import Register from './pages/register/Register'
 import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Redirect,
-} from 'react-router-dom';
-// import { useContext } from "react";
-// import { AuthContext } from "./context/AuthContext";
+  Redirect
+} from 'react-router-dom'
+import { useContext } from 'react'
+import { AuthContext } from './context/AuthContext'
 
-function App() {
-  // const { user } = useContext(AuthContext);
+function App () {
+  const { user } = useContext(AuthContext)
   return (
+    // eslint-disable-next-line react/react-in-jsx-scope
     <Router>
       <Switch>
-      <Route exact path="/">
-        <Home />
-      </Route>
-      <Route path="/login">
-        <Login />
-      </Route>
-      <Route path="/register">
-        <Register />
-      </Route>
-      <Route path="/profile/:username">
-        <Profile />
-      </Route>
+        <Route exact path="/">
+          {user ? <Home /> : <Register />}
+        </Route>
+        <Route path="/login">{user ? <Redirect to="/" /> : <Login />}</Route>
+        <Route path="/register">
+          {user ? <Redirect to="/" /> : <Register />}
+        </Route>
+        <Route path="/profile/:username">
+          <Profile />
+        </Route>
       </Switch>
     </Router>
-  );
+  )
 }
 
-export default App;
+export default App
